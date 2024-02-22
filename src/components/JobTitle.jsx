@@ -6,9 +6,9 @@ function JobTitle() {
   console.log(jobs);
   return (
     <div className="w-full">
-      <main className="mt-16 flex bg-yellow-200">
-        <div className="">
-          <ul className="flex gap-7 ">
+      <main className="mt-16 flex bg-yellow-200 justify-start">
+        <div className="mx-20">
+          <ul className="flex gap-10 justify-center py-6">
             <li>All</li>
             <li>Open</li>
             <li>Hold</li>
@@ -22,18 +22,6 @@ function JobTitle() {
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
             <tr>
-              <th scope="col" className="p-4">
-                <div className="flex items-center">
-                  <input
-                    id="checkbox-all-search"
-                    type="checkbox"
-                    className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                  />
-                  <label className="checkbox-all-search sr-only">
-                    checkbox
-                  </label>
-                </div>
-              </th>
               <th scope="col" className="px-6 py-3">
                 Job Title
               </th>
@@ -54,38 +42,29 @@ function JobTitle() {
           <tbody>
             {jobs.map(
               ({
+                id,
                 title,
                 company_name,
                 category,
                 candidate_required_location,
+                company_logo,
+                salary,
               }) => {
                 return (
-                  <tr className="bg-white border-b  hover:bg-gray-50">
-                    <td className="w-4 p-4">
-                      <div className="flex items-center">
-                        <input
-                          id="checkbox-table-search-1"
-                          type="checkbox"
-                          className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500"
-                        />
-                        <label className="checkbox-table-search-1 sr-only">
-                          checkbox
-                        </label>
-                      </div>
-                    </td>
+                  <tr key={id} className="bg-white border-b  hover:bg-gray-50">
                     <th
                       scope="row"
                       className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap"
                     >
                       <img
                         className="w-10 h-10 rounded-full"
-                        src="/docs/images/people/profile-picture-1.jpg"
-                        alt="Jese image"
+                        src={`https://ui-avatars.com/api/?bold=true&font-size=0.33&background=random&name=${company_name}`}
+                        alt=""
                       />
                       <div className="ps-3">
                         <div className="text-base font-semibold">{title}</div>
                         <div className="font-normal text-gray-500">
-                          neil.sims@flowbite.com
+                          {company_name}
                         </div>
                       </div>
                     </th>
@@ -93,7 +72,9 @@ function JobTitle() {
                     <td className="px-6 py-4">
                       <div className="flex items-center">
                         <div className="h-2.5 w-2.5 rounded-full bg-green-500 me-2"></div>
-                        Online
+                        <button className="bg-purple-300 text-black px-2 py-1 rounded-full transition duration-200 ease-in-out hover:bg-purple-700 active:bg-purple-900 focus:outline-none">
+                          Online
+                        </button>
                       </div>
                     </td>
                     <td className="px-6 py-4">
@@ -101,7 +82,7 @@ function JobTitle() {
                         href="#"
                         className="font-medium text-blue-60 hover:underline"
                       >
-                        Edit user
+                        {salary || "Salary not disclosed"}
                       </a>
                     </td>
                     <td className="px-6 py-4">
