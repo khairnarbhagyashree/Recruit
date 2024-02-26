@@ -5,9 +5,9 @@ function JobTitle() {
   const { jobs } = useContext(JobContext);
   console.log(jobs);
   return (
-    <div className="w-full">
-      <main className="mt-16 flex bg-yellow-200 justify-start">
-        <div className="mx-20">
+    <div className="w-full flex-1">
+      <main className="flex bg-yellow-200 justify-start">
+        <div className="top-0 left-0 right-0 mx-20">
           <ul className="flex gap-10 justify-center py-6">
             <li>All</li>
             <li>Open</li>
@@ -47,7 +47,6 @@ function JobTitle() {
                 company_name,
                 category,
                 candidate_required_location,
-                company_logo,
                 salary,
               }) => {
                 return (
