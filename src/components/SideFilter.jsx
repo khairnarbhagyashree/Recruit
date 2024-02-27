@@ -1,13 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { JobContext } from "./JobContext";
 
 const SideFilter = () => {
   const locations = ["USA", "Canada", "India", "Germany", "Worldwide"];
+  const categories = [
+    "Marketing",
+    "Software",
+    "Product",
+    "Operations",
+    "Sales",
+  ];
 
-  const [selectedLocations, setSelectedLocations] = useState([]);
+  const { selectedLocations, setSelectedLocations } = useContext(JobContext);
 
-  const handleCheckboxChange = (event) => {
-    const location = event.target.value;
-    const isChecked = event.target.checked;
+  const handleCheckboxChange = (e) => {
+    const location = e.target.value;
+    
+    const isChecked = e.target.checked;
 
     if (isChecked) {
       setSelectedLocations([...selectedLocations, location]);
