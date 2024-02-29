@@ -18,7 +18,9 @@ export function makeServer({ environment = "test" }) {
     routes() {
       this.get("/api/jobs", (schema, request) => {
         const location = String(request.queryParams?.["location"] || "");
+        const category = String(request.queryParams?.["categories"] || "");
         let jobs = schema.db.job;
+
         if (location) {
           const filter = location.split(",");
           jobs = jobs.filter(({ candidate_required_location }) => {
@@ -27,6 +29,16 @@ export function makeServer({ environment = "test" }) {
             );
           });
         }
+
+        if (category) {
+          const filter = category.split(",");
+          jobs = jobs.filter(({ category }) => {
+            return filter.some((substring) =>
+              category.toLowerCase().includes(substring)
+            );
+          });
+        }
+
         return jobs;
       });
     },

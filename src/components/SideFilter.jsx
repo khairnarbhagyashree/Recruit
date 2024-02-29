@@ -11,17 +11,36 @@ const SideFilter = () => {
     "Sales",
   ];
 
-  const { selectedLocations, setSelectedLocations } = useContext(JobContext);
+  const {
+    selectedLocations,
+    setSelectedLocations,
+    selectedCategories,
+    setSelectedCategories,
+  } = useContext(JobContext);
 
   const handleCheckboxChange = (e) => {
     const location = e.target.value;
-    
+
     const isChecked = e.target.checked;
 
     if (isChecked) {
       setSelectedLocations([...selectedLocations, location]);
     } else {
       setSelectedLocations(selectedLocations.filter((loc) => loc !== location));
+    }
+  };
+
+  const handleCategoryCheckboxChange = (e) => {
+    const categories = e.target.value;
+
+    const isChecked = e.target.checked;
+
+    if (isChecked) {
+      setSelectedCategories([...selectedCategories, categories]);
+    } else {
+      setSelectedCategories(
+        selectedCategories.filter((cat) => cat !== categories)
+      );
     }
   };
 
@@ -39,6 +58,21 @@ const SideFilter = () => {
               onChange={handleCheckboxChange}
             />
             <label htmlFor={location}>{location}</label>
+          </li>
+        ))}
+      </ul>
+      <h3>Categories</h3>
+      <ul>
+        {categories.map((categories) => (
+          <li key={categories}>
+            <input
+              type="checkbox"
+              id={categories}
+              value={categories}
+              checked={selectedCategories.includes(categories)}
+              onChange={handleCategoryCheckboxChange}
+            />
+            <label htmlFor={categories}>{categories}</label>
           </li>
         ))}
       </ul>

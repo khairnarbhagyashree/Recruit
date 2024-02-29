@@ -6,37 +6,52 @@ const JobContextProvider = (props) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedLocations, setSelectedLocations] = useState([]);
-  const [selectedCategories, setselectedCategories] = useState([]);
+  const [selectedCategories, setSelectedCategories] = useState([]);
 
   const buildUrl = () => {
     let filters = selectedLocations.join(",").toLowerCase();
     let categoryfilters = selectedCategories.join(",").toLowerCase();
 
-    const url = "/api/jobs";
+    let myfilters = {
+      location: filters,
+      categories: categoryfilters,
+    };
 
-    if (filters) {
-      return url + `?location=${filters}`;
-    } else if (categoryfilters) {
-      return `${buildUrl()}&&categories=${categoryfilters}`;
-    } else {
-      return buildUrl();
+    const queryParams = new URLSearchParams(myfilters).toString().toLowerCase();
+    console.log("queryParams===>", queryParams);
+
+    let url = "/api/jobs";
+
+    if (queryParams) {
+      url += `?${queryParams}`;
     }
+
+    return url;
   };
-};
 
-useEffect(() => {
-  fetchJobs();
-}, [selectedLocations, selectedCategories]);
+  // useEffect(() => {
+  //   const url = buildUrl();
+  //   fetchJobs();
+  // }, [selectedLocations, selectedCategories]);
 
-const fetchJobs = () => {
-  const url = buildUrl();
-  console.log("url====>", url);
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      setJobs(data);
-    });
+  // const fetchJobs = () => {
+  //   const url = buildUrl();
+  //   console.log("url====>", url);
+  //   fetch(url)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setJobs(data);
+  //     });
 
+  useEffect(() => {
+    const url = buildUrl();
+    console.log("url====>", url);
+    fetch(url)
+      .then((res) => res.json())
+      .then((data) => {
+        setJobs(data);
+      });
+  }, [selectedLocations, selectedCategories]);
   return (
     <JobContext.Provider
       value={{
@@ -45,7 +60,7 @@ const fetchJobs = () => {
         selectedLocations,
         setSelectedLocations,
         selectedCategories,
-        setselectedCategories,
+        setSelectedCategories,
       }}
     >
       {props.children}
