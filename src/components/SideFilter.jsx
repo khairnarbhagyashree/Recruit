@@ -11,71 +11,87 @@ const SideFilter = () => {
     "Sales",
   ];
 
-  const {
-    selectedLocations,
-    setSelectedLocations,
-    selectedCategories,
-    setSelectedCategories,
-  } = useContext(JobContext);
+  const job_type = ["Full_time", "Freelance", "Contract"];
 
-  const handleCheckboxChange = (e) => {
-    const location = e.target.value;
+  const { setMyfilters } = useContext(JobContext);
 
-    const isChecked = e.target.checked;
+  const handleCheckboxChange = (filter, value) => {
+    setMyfilters((prevParams) => {
+      const updatedFilters = [...prevParams[filter]];
+      const index = updatedFilters.indexOf(value);
 
-    if (isChecked) {
-      setSelectedLocations([...selectedLocations, location]);
-    } else {
-      setSelectedLocations(selectedLocations.filter((loc) => loc !== location));
-    }
-  };
+      if (index !== -1) {
+        // Remove if already selected
+        updatedFilters.splice(index, 1);
+      } else {
+        // Add if not selected
+        updatedFilters.push(value);
+      }
 
-  const handleCategoryCheckboxChange = (e) => {
-    const categories = e.target.value;
-
-    const isChecked = e.target.checked;
-
-    if (isChecked) {
-      setSelectedCategories([...selectedCategories, categories]);
-    } else {
-      setSelectedCategories(
-        selectedCategories.filter((cat) => cat !== categories)
-      );
-    }
+      return {
+        ...prevParams,
+        [filter]: updatedFilters,
+      };
+    });
   };
 
   return (
     <div>
-      <h3>Locations</h3>
-      <ul>
-        {locations.map((location) => (
-          <li key={location}>
-            <input
-              type="checkbox"
-              id={location}
-              value={location}
-              checked={selectedLocations.includes(location)}
-              onChange={handleCheckboxChange}
-            />
-            <label htmlFor={location}>{location}</label>
-          </li>
-        ))}
-      </ul>
-      <h3>Categories</h3>
-      <ul>
-        {categories.map((categories) => (
-          <li key={categories}>
-            <input
-              type="checkbox"
-              id={categories}
-              value={categories}
-              checked={selectedCategories.includes(categories)}
-              onChange={handleCategoryCheckboxChange}
-            />
-            <label htmlFor={categories}>{categories}</label>
-          </li>
-        ))}
-      </ul>
+      <div>
+        <h3>Locations</h3>
+        <div>
+          {locations.map((location) => (
+            <li key={location}>
+              <input
+                type="checkbox"
+                id={location}
+                value={location}
+                onChange={() => handleCheckboxChange("location", location)}
+              />
+              <label htmlFor={location}>{location}</label>
+            </li>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3>Categories</h3>
+        <div>
+          {categories.map((categories) => (
+            <li key={categories}>
+              <input
+                type="checkbox"
+                id={categories}
+                value={categories}
+                onChange={() => handleCheckboxChange("category", categories)}
+              />
+              <label htmlFor={categories}>{categories}</label>
+            </li>
+          ))}
+        </div>
+      </div>
+
+      <div>
+        <h3>Job Type</h3>
+        <div>
+          {job_type.map((job_type) => (
+            <li key={job_type}>
+              <input
+                type="checkbox"
+                id={job_type}
+                value={job_type}
+                onChange={() =>
+                  handleCheckboxChange(
+                    "job_type",
+                    job_type.split(" ").join("_")
+                  )
+                }
+              />
+              <label htmlFor={job_type}>{job_type}</label>
+            </li>
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

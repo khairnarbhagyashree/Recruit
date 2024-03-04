@@ -37,6 +37,9 @@ function JobTitle() {
               <th scope="col" className="px-6 py-3">
                 Location
               </th>
+              <th scope="col" className="px-6 py-3">
+                Job Type
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -48,6 +51,7 @@ function JobTitle() {
                 category,
                 candidate_required_location,
                 salary,
+                job_type,
               }) => {
                 return (
                   <tr key={id} className="bg-white border-b  hover:bg-gray-50">
@@ -81,7 +85,7 @@ function JobTitle() {
                         href="#"
                         className="font-medium text-blue-60 hover:underline"
                       >
-                        {salary || "Salary not disclosed"}
+                        {salary || "Not Specified"}
                       </a>
                     </td>
                     <td className="px-6 py-4">
@@ -90,6 +94,14 @@ function JobTitle() {
                         className="font-medium text-blue-60 hover:underline"
                       >
                         {candidate_required_location}
+                      </a>
+                    </td>
+                    <td className="px-6 py-4">
+                      <a
+                        href="#"
+                        className="font-medium text-blue-60 hover:underline"
+                      >
+                        {job_type}
                       </a>
                     </td>
                   </tr>
