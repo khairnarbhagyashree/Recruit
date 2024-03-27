@@ -5,9 +5,7 @@ export const JobContext = createContext();
 const JobContextProvider = (props) => {
   const [jobs, setJobs] = useState([]);
   const [loading, setLoading] = useState(true);
-  // const [selectedLocations, setSelectedLocations] = useState([]);
-  // const [selectedCategories, setSelectedCategories] = useState([]);
-  // const [selectedType, setSelectedType] = useState([]);
+  const [selectedPage, setSelectedPage] = useState("");
   const [myfilters, setMyfilters] = useState({
     category: [],
     location: [],
@@ -15,16 +13,6 @@ const JobContextProvider = (props) => {
   });
 
   const buildUrl = () => {
-    // let filters = myfilters.join(",").toLowerCase();
-    // let categoryfilters = selectedCategories.join(",").toLowerCase();
-    // let jobtypefilters = selectedType.join(",").toLowerCase();
-
-    // let myfilters = {
-    //   location: filters,
-    //   categories: categoryfilters,
-    //   job_type: jobtypefilters,
-    // };
-
     const queryParams = new URLSearchParams(myfilters).toString().toLowerCase();
     console.log("queryParams===>", queryParams);
 
@@ -46,7 +34,6 @@ const JobContextProvider = (props) => {
         setJobs(data);
       });
   }, [myfilters]);
-  // }, [selectedLocations, selectedCategories, selectedType]);
   return (
     <JobContext.Provider
       value={{

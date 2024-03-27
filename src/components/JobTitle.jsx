@@ -1,23 +1,11 @@
 import React, { useContext } from "react";
-import { JobContext } from "./JobContext";
+import { JobContext } from "../context/JobContext";
 
 function JobTitle() {
   const { jobs } = useContext(JobContext);
   console.log(jobs);
   return (
     <div className="w-full flex-1">
-      <main className="flex bg-yellow-200 justify-start">
-        <div className="top-0 left-0 right-0 mx-20">
-          <ul className="flex gap-10 justify-center py-6">
-            <li>All</li>
-            <li>Open</li>
-            <li>Hold</li>
-            <li>Closed</li>
-            <li>Drafts</li>
-          </ul>
-        </div>
-      </main>
-
       <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
         <table className="w-full text-sm text-left rtl:text-right text-gray-500 ">
           <thead className="text-xs text-gray-700 uppercase bg-gray-50">
@@ -37,6 +25,7 @@ function JobTitle() {
               <th scope="col" className="px-6 py-3">
                 Location
               </th>
+
               <th scope="col" className="px-6 py-3">
                 Job Type
               </th>
