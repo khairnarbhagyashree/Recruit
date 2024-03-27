@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { JobContext } from "./JobContext";
+import { JobContext } from "../context/JobContext";
 
 const SideFilter = () => {
   const locations = ["USA", "Canada", "India", "Germany", "Worldwide"];
@@ -37,18 +37,22 @@ const SideFilter = () => {
 
   return (
     <div>
+      <aside className="sticky top-20 h-[calc(100vh-theme(spacing.16))] w-72 overflow-y-auto"></aside>
       <div>
         <h3>Locations</h3>
         <div>
           {locations.map((location) => (
             <li key={location}>
               <input
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                 type="checkbox"
                 id={location}
                 value={location}
                 onChange={() => handleCheckboxChange("location", location)}
               />
-              <label htmlFor={location}>{location}</label>
+              <label form="default-checkbox" className="ms-2 text-gray-400">
+                {location}
+              </label>
             </li>
           ))}
         </div>
@@ -60,12 +64,15 @@ const SideFilter = () => {
           {categories.map((categories) => (
             <li key={categories}>
               <input
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                 type="checkbox"
                 id={categories}
                 value={categories}
                 onChange={() => handleCheckboxChange("category", categories)}
               />
-              <label htmlFor={categories}>{categories}</label>
+              <label form="default-checkbox" className="ms-2 text-gray-400">
+                {categories}
+              </label>
             </li>
           ))}
         </div>
@@ -77,6 +84,7 @@ const SideFilter = () => {
           {job_type.map((job_type) => (
             <li key={job_type}>
               <input
+                className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                 type="checkbox"
                 id={job_type}
                 value={job_type}
@@ -87,7 +95,9 @@ const SideFilter = () => {
                   )
                 }
               />
-              <label htmlFor={job_type}>{job_type}</label>
+              <label form="default-checkbox" className="ms-2 text-gray-400">
+                {job_type}
+              </label>
             </li>
           ))}
         </div>

@@ -1,8 +1,8 @@
 import React from "react";
 import "./App.css";
-import Home from "./components/Home";
 import { HashRouter as Router, Route, Routes } from "react-router-dom";
-import JobContextProvider from "./components/JobContext";
+import Home from "./layouts/Home";
+import JobContextProvider from "./context/JobContext";
 
 function App() {
   function NotFound() {

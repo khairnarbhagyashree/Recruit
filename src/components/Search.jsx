@@ -7,14 +7,13 @@ const Search = ({ handleSubmit, history }) => {
   };
 
   return (
-    <div className="flex justify-center">
-      <div className="text-green-700"></div>
+    <div className="flex">
       <form
-        className="search-form w-full md:w-1/2"
+        className="search-form w-full"
         onSubmit={(e) => handleSubmit(e, searchEntry)}
       >
-        <div className="relative">
-          <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+        <div className="relative mt-1">
+          <div className="absolute right-0 inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
               className="w-4 h-4 text-gray-500"
               aria-hidden="true"
@@ -33,11 +32,10 @@ const Search = ({ handleSubmit, history }) => {
           </div>
           <input
             onChange={updateSearchInput}
-            type="search"
+            type="text"
             id="default-search"
-            className="block items-center w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+            className="block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-3xl w-80 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
             placeholder="Search..."
-
           />
         </div>
       </form>
