@@ -10,9 +10,7 @@ function Home() {
         <Header />
       </div>
       <div className="flex min-h-screen mt-20">
-        {/* <aside className="sticky top-20 h-[calc(100vh-theme(spacing.16))] w-72 overflow-y-auto"> */}
         <SideFilter />
-        {/* </aside> */}
         <JobTitle />
       </div>
     </>
