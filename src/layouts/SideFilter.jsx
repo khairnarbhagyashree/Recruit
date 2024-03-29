@@ -31,12 +31,13 @@ const SideFilter = () => {
 
   return (
     <div className="sticky top-20 h-[calc(100vh-theme(spacing.16))] w-72 overflow-y-auto">
-      <div>
+      <div className="ml-6 my-14 space-y-10">
+      <div className="text-3xl">Jobs</div>
         <div>
           <h3>Locations</h3>
           <div>
             {locations.map((location) => (
-              <li key={location}>
+              <div key={location} className="my-4">
                 <input
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   type="checkbox"
@@ -45,7 +46,7 @@ const SideFilter = () => {
                   onChange={() => handleCheckboxChange("location", location)}
                 />
                 <label className="ms-2 text-gray-400">{location}</label>
-              </li>
+              </div>
             ))}
           </div>
         </div>
@@ -54,7 +55,7 @@ const SideFilter = () => {
           <h3>Categories</h3>
           <div>
             {categories.map((category) => (
-              <li key={category}>
+              <div key={category} className="my-4">
                 <input
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   type="checkbox"
@@ -63,7 +64,7 @@ const SideFilter = () => {
                   onChange={() => handleCheckboxChange("category", category)}
                 />
                 <label className="ms-2 text-gray-400">{category}</label>
-              </li>
+              </div>
             ))}
           </div>
         </div>
@@ -72,7 +73,7 @@ const SideFilter = () => {
           <h3>Job Type</h3>
           <div>
             {jobtype.map((jobtype) => (
-              <li key={jobtype}>
+              <div key={jobtype} className="my-4">
                 <input
                   className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 focus:ring-2"
                   type="checkbox"
@@ -86,7 +87,7 @@ const SideFilter = () => {
                   }
                 />
                 <label className="ms-2 text-gray-400">{jobtype}</label>
-              </li>
+              </div>
             ))}
           </div>
         </div>

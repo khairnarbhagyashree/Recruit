@@ -4,6 +4,7 @@ export const JobContext = createContext();
 
 const JobContextProvider = (props) => {
   const [jobs, setJobs] = useState([]);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const [selectedPage, setSelectedPage] = useState("");
   const [myfilters, setMyfilters] = useState({
@@ -13,11 +14,15 @@ const JobContextProvider = (props) => {
   });
 
   const buildUrl = () => {
-    const queryParams = new URLSearchParams(myfilters).toString().toLowerCase();
-    console.log("queryParams===>", queryParams);
-
     let url = "/api/jobs";
 
+    if (search) {
+      url += `/search?search=${search}`;
+      console.log(url);
+      return url;
+    }
+
+    const queryParams = new URLSearchParams(myfilters).toString().toLowerCase();
     if (queryParams) {
       url += `?${queryParams}`;
     }
@@ -33,7 +38,8 @@ const JobContextProvider = (props) => {
       .then((data) => {
         setJobs(data);
       });
-  }, [myfilters]);
+  }, [myfilters, search]);
+
   return (
     <JobContext.Provider
       value={{
@@ -41,6 +47,7 @@ const JobContextProvider = (props) => {
         loading,
         myfilters,
         setMyfilters,
+        setSearch,
       }}
     >
       {props.children}

@@ -1,17 +1,13 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { JobContext } from "../context/JobContext";
+import { DebounceInput } from "react-debounce-input";
 
-const Search = ({ handleSubmit, history }) => {
-  const [searchEntry, setSearchEntry] = useState("");
-  const updateSearchInput = (e) => {
-    setSearchEntry(e.target.value);
-  };
+const Search = () => {
+  const { setSearch } = useContext(JobContext);
 
   return (
     <div className="flex">
-      <form
-        className="search-form w-full"
-        onSubmit={(e) => handleSubmit(e, searchEntry)}
-      >
+      <form className="search-form w-full">
         <div className="relative mt-1">
           <div className="absolute right-0 inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
             <svg
@@ -30,12 +26,14 @@ const Search = ({ handleSubmit, history }) => {
               />
             </svg>
           </div>
-          <input
-            onChange={updateSearchInput}
+          <DebounceInput
+            minLength={1}
+            debounceTimeout={500}
+            onChange={(event) => setSearch(event.target.value)}
             type="text"
-            id="default-search"
+            id="table-search"
             className="block py-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-3xl w-80 bg-gray-50 focus:ring-indigo-500 focus:border-indigo-500"
-            placeholder="Search..."
+            placeholder="Search here"
           />
         </div>
       </form>

@@ -16,6 +16,29 @@ export function makeServer({ environment = "test" }) {
     },
 
     routes() {
+      this.get("/api/jobs/search", (schema, request) => {
+        let jobs = schema.db.job;
+        const search = String(request.queryParams?.["search"] || "");
+        if (search) {
+          jobs = jobs.filter(
+            ({
+              category,
+              candidate_required_location,
+              job_type,
+              company_name,
+            }) => {
+              return (
+                category.toLowerCase().includes(search) ||
+                candidate_required_location.toLowerCase().includes(search) ||
+                job_type.toLowerCase().includes(search) ||
+                company_name.toLowerCase().includes(search)
+              );
+            }
+          );
+        }
+        return jobs;
+      });
+
       this.get("/api/jobs", (schema, request) => {
         const location = String(request.queryParams?.["location"] || "");
         const category = String(request.queryParams?.["category"] || "");
